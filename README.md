@@ -17,7 +17,7 @@ como o cliente utiliza o WSDL para montar suas requisições </li>
 <ul>
   <li> API gateway - Node.js </li>
   <li> API rest - Django rest </li>
-  <li> API soap com IA - Python com spyne </li>
+  <li> API soap com IA - Python + spyne + scikit learn </li>
   <li> Documentação rest - Swagger </li>
   <li> Cliente web - Vue.js </li>
   <li> Documentação - Swagger e Soap UI </li>
