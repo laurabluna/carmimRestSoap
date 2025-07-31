@@ -1,0 +1,8 @@
+# Ignora o node_modules de qualquer subpasta (inclusive do API Gateway)
+**/node_modules/
+
+# Ignora todos os ambientes virtuais (venv)
+**/venv/
+
+# Ignora __pycache__ de qualquer lugar
+**/__pycache__/
