@@ -3,6 +3,7 @@
     "@fontsource/montserrat": "^5.2.6",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
+    "pika": "^0.0.1-security",
     "xml2js": "^0.6.2"
   }
 }

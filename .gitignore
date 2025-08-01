@@ -5,4 +5,8 @@
 **/venv/
 
 # Ignora __pycache__ de qualquer lugar
-**/__pycache__/
+**__pycache__/
+
+*.pyc
+
+

@@ -1,4 +1,4 @@
-from spyne import Application, rpc, ServiceBase, Unicode, Integer, ComplexModel
+from spyne import Application, ServiceBase, Unicode, ComplexModel, rpc, Integer
 from spyne.protocol.soap import Soap11
 from spyne.server.wsgi import WsgiApplication
 from modelo import prever_diagnostico_e_recomendacao
@@ -8,7 +8,8 @@ class ResultadoDiagnostico(ComplexModel):
     recomendacao = Unicode
 
 class DiagnosticoService(ServiceBase):
-    @rpc(Integer, Integer, Integer, Integer, Integer, _returns=ResultadoDiagnostico)
+    @rpc(Integer, Integer, Integer, Integer, Integer, _returns=ResultadoDiagnostico,
+         _args=('dor_abdominal', 'ciclo_irregular', 'fadiga', 'dor_durante_sexo', 'intestino_preso'))
     def analisar_sintomas(ctx, dor_abdominal, ciclo_irregular, fadiga, dor_durante_sexo, intestino_preso):
         sintomas = {
             "dor_abdominal": dor_abdominal,
@@ -23,7 +24,7 @@ class DiagnosticoService(ServiceBase):
 application = Application(
     [DiagnosticoService],
     tns='soap.carmim.diagnostico',
-    in_protocol=Soap11(validator='lxml'),
+    in_protocol=Soap11(),
     out_protocol=Soap11()
 )
 
