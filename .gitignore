@@ -5,7 +5,8 @@
 **/venv/
 
 # Ignora __pycache__ de qualquer lugar
-**__pycache__/
+api_rest_django/api_rest__pycache__/
+**/__pycache__/
 
 *.pyc
 

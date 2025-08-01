@@ -20,6 +20,9 @@ from django.urls import path, include
 from rest_framework import routers
 from sintomas.views import SintomaViewSet
 from sintomas.views import DiagnosticoView
+from sintomas.views import EnviarSintomasView
+
+
 
 
 
@@ -48,4 +51,5 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('diagnostico/', DiagnosticoView.as_view(), name='diagnostico'),
+    path('enviar_sintomas/', EnviarSintomasView.as_view(), name='enviar_sintomas'),
 ]

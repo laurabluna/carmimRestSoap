@@ -7,6 +7,24 @@ from rest_framework import status, viewsets
 import requests
 from .serializers import SintomaSerializer
 from .models import Sintoma
+from services.rabbitmq import enviar_sintomas_para_fila
+
+
+class EnviarSintomasView(APIView):
+    def post(self, request):
+        sintomas = request.data  
+        if not sintomas:
+            return Response({'erro': 'Nenhum sintoma fornecido'}, status=status.HTTP_400_BAD_REQUEST)
+
+        correlation_id = enviar_sintomas_para_fila(sintomas)
+        return Response({'correlation_id': correlation_id}, status=status.HTTP_202_ACCEPTED)
+
+class SintomasAPIView(APIView):
+    def post(self, request):
+        sintomas = request.data
+        correlation_id = enviar_sintomas_para_fila(sintomas)
+
+        return Response({"correlation_id": correlation_id}, status=status.HTTP_202_ACCEPTED)
 
 def publicar_sintomas(sintomas):
     try:

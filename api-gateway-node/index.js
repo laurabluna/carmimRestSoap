@@ -5,6 +5,22 @@ const { parseStringPromise } = require('xml2js');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+const amqp = require('amqplib');
+
+let channel;
+
+async function conectarRabbit() {
+  try {
+    const conn = await amqp.connect('amqp://localhost');
+    channel = await conn.createChannel();
+    await channel.assertQueue('diagnosticos', { durable: true });
+    console.log('Conectado ao RabbitMQ');
+  } catch (err) {
+    console.error('Erro ao conectar no RabbitMQ:', err.message);
+  }
+}
+
+
 const app = express();
 app.use(cors())
 app.use(express.json());
@@ -101,6 +117,8 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  */
 
 
+
+
 app.get('/api/sintomas', (req, res) => {
   res.json({
     sintomas: sintomasMapeados,
@@ -180,6 +198,9 @@ app.post('/api/diagnostico', async (req, res) => {
     res.status(500).send('Erro ao consultar serviço SOAP');
   }
 });
+
+conectarRabbit();
+
 
 app.listen(3001, () => {
   console.log('Gateway rodando em http://localhost:3001');
