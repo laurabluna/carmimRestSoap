@@ -1,5 +1,7 @@
 # carmimRestSoap
 
+![Capa do projeto](carmim_capa.png)
+
 <p> Criar uma arquitetura que integre rest e soap, implemente e documente uma API gateway.</p>
 <ul>
   <li> Desenvolver ao menos um API Gateway </li>
